@@ -12,6 +12,9 @@ template '/etc/monit.d/delayed_job.monitrc' do
   owner 'root'
   group 'root'
   mode '0755'
+  variables(
+    env: node[:deploy][:hats][:rails_env]
+  )
 end
 
 
