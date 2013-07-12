@@ -17,4 +17,8 @@ template '/etc/monit.d/delayed_job.monitrc' do
   )
 end
 
+bash 'monit-reload-restart' do
+  user 'root'
+  code 'monit reload && monit'
+end
 
