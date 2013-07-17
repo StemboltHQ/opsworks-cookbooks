@@ -15,7 +15,7 @@ server {
     client_max_body_size <%= @application[:nginx][:client_max_body_size] %>;
   <% end %>
 
-  location ^/assets/ {
+  location ~* ^/assets/ {
     gzip_static on;
     expires     max;
     add_header  Cache-Control public;
@@ -70,7 +70,7 @@ server {
     client_max_body_size <%= @application[:nginx][:client_max_body_size] %>;
   <% end %>
 
-  location ^/assets/ {
+  location ~* ^/assets/ {
     gzip_static on;
     expires     max;
     add_header  Cache-Control public;
