@@ -22,4 +22,4 @@ define :opsworks_rails do
     end
   end
 
-end 
+end
