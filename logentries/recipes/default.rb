@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-remote_file '/etc/ssl/certs/logentries.all.crt' do
+cookbook_file '/etc/ssl/certs/logentries.all.crt' do
   source 'logentries.all.crt'
   owner 'root'
   group 'root'
