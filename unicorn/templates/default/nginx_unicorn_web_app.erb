@@ -26,6 +26,13 @@ server {
     proxy_set_header Host $http_host;
     proxy_redirect off;
 
+    <% if @application[:force_ssl] %>
+    # Rewrite everything to HTTPS. Except for the health_check.
+    if ($http_x_forwarded_proto != 'https') {
+      rewrite ^((?!/health_check).) https://$host$uri permanent;
+    }
+    <% end %>
+
     # If you don't find the filename in the static files
     # Then request it from the unicorn server
     if (!-f $request_filename) {
