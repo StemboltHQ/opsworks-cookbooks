@@ -7,11 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
-environment = node[:deploy][:hats][:rails_env]
+node[:deploy].each do |application, deploy|
+  deploy = node[:deploy][application]
 
-bash 'update-crontab' do
-  cwd '/srv/www/hats/current'
-  user 'deploy'
-  code "bundle exec whenever --set environment=#{environment} --update-crontab hats"
+  bash 'update-crontab' do
+    cwd '/srv/www/hats/current'
+    user 'deploy'
+    code "bundle exec whenever --set environment=#{deploy[:rails_env]} --update-crontab hats"
+  end
 end
-
