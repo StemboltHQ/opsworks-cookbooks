@@ -7,18 +7,22 @@
 # All rights reserved - Do Not Redistribute
 #
 
-template '/etc/monit.d/delayed_job.monitrc' do
-  source 'delayed_job.monitrc.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
-  variables(
-    :env => node[:deploy][:hats][:rails_env]
-  )
-end
+node[:deploy].each do |application, deploy|
+  deploy = node[:deploy][application]
 
-bash 'monit-reload-restart' do
-  user 'root'
-  code 'monit reload && monit'
-end
+  template '/etc/monit.d/delayed_job.monitrc' do
+    source 'delayed_job.monitrc.erb'
+    owner 'root'
+    group 'root'
+    mode '0755'
+    variables(
+      :env => deploy[:rails_env],
+      :dir => deploy[:deploy_to]
+    )
+  end
 
+  bash 'monit-reload-restart' do
+    user 'root'
+    code 'monit reload && monit'
+  end
+end
