@@ -110,7 +110,7 @@ server {
 <% end %>
 
 <% if @application[:force_www] %>
-  <% unless (domain = @application[:domains].first).start_with?('www.') %>
+  <% if (domain = @application[:domains].first).start_with?('www.') %>
     server {
       <% domain.slice!(/\Awww\./) %>
       server_name <%= domain %>;
