@@ -111,10 +111,10 @@ server {
 
 <% if @application[:force_www] %>
   <% if (domain = @application[:domains].first).start_with?('www.') %>
-    server {
-      <% domain.slice!(/\Awww\./) %>
-      server_name <%= domain %>;
-      return 301 $scheme://www.<%= domain %>$request_uri;
-    }
+server {
+  <% domain.slice!(/\Awww\./) %>
+  server_name <%= domain %>;
+  return 301 $scheme://www.<%= domain %>$request_uri;
+}
   <% end %>
 <% end %>
