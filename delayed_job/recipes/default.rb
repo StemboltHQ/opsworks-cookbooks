@@ -17,7 +17,9 @@ node[:deploy].each do |application, deploy|
     mode '0755'
     variables(
       :env => deploy[:rails_env],
-      :dir => deploy[:deploy_to]
+      :dir => deploy[:deploy_to],
+      :user => deploy[:user],
+      :group => deploy[:group]
     )
   end
 
