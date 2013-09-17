@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'deploy'
+
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
@@ -23,8 +25,8 @@ node[:deploy].each do |application, deploy|
     )
   end
 
-  bash 'monit-reload-restart' do
+  bash 'monit-reload' do
     user 'root'
-    code 'monit reload && monit'
+    code 'monit reload'
   end
 end
