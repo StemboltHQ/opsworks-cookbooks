@@ -21,7 +21,8 @@ node[:deploy].each do |application, deploy|
       :env => deploy[:rails_env],
       :dir => deploy[:deploy_to],
       :user => deploy[:user],
-      :group => deploy[:group]
+      :group => deploy[:group],
+      :timeout => node[:delayed_job][:timeout]
     )
   end
 
